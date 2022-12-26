@@ -1,0 +1,1 @@
+For my third project, I decided to build a Pokedex! In case you are unfamiliar, a Pokedex is a fictional device designed to provide information regarding the various species of Pokemon in the video game. I made this by using React JS, Bootstrap, and React-Bootstrap. To check out this project, please go to https://awesomethan.github.io/personal-website/#/portfolio.
