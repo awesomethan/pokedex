@@ -117,20 +117,20 @@ function PokemonCard({ name, url }) {
           </div>
         ))}
         <div className="container d-flex justify-content-around">
-          <div>
+          <div className="d-flex flex-column align-items-center">
             <p>
               <u>Height</u>
             </p>
-            {Math.round(height * 0.328084 * 100) / 100} ft.
+            <p>{Math.round(height * 0.328084 * 100) / 100} ft.</p>
           </div>
-          <div>
+          <div className="d-flex flex-column align-items-center">
             <p>
               <u>Weight</u>
             </p>
             {Math.round(weight * 0.220462 * 100) / 100} lbs.
           </div>
         </div>
-        {getDescriptions()}
+        <div className="px-3">{getDescriptions()}</div>
       </div>
     </div>
   );
