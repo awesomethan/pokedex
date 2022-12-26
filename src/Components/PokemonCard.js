@@ -40,15 +40,17 @@ function PokemonCard({ name, url }) {
       setHeight(res.data.height);
       setWeight(res.data.weight);
     });
-    axios.get(`https://pokeapi.co/api/v2/pokemon-species/${index}`).then((res) => {
-      res.data.flavor_text_entries.some((desc) => {
-        if (desc.language.name === "en") {
-          setDescription(desc.flavor_text)
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon-species/${index}`)
+      .then((res) => {
+        res.data.flavor_text_entries.some((desc) => {
+          if (desc.language.name === "en") {
+            setDescription(desc.flavor_text);
+            return null;
+          }
           return null;
-        }
-        return null;
-      })
-    })
+        });
+      });
   }, [url, index]);
 
   function capitalize(str) {
@@ -60,19 +62,23 @@ function PokemonCard({ name, url }) {
     return str;
   }
 
+  function getIndex(index) {
+    if (index > 10000) index -= 9095;
+    return index;
+  }
+
   function getDescriptions() {
-    if (description === "") {
+    if (description === "" && getIndex(index) !== 906) {
       return null;
-    }
-    else {
-      return <div className="pt-2 description-container">{description}</div>
+    } else {
+      return <div className="pt-2 description-container">{description}</div>;
     }
   }
 
   return (
     <div className="card text-bg-danger border border-2">
       <div className="card-header">
-        {index}
+        {getIndex(index)}
         <div className="float-end">
           {types.map((t) => (
             <div
