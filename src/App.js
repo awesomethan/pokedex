@@ -37,7 +37,11 @@ function App() {
 
   function getPages() {
     const pages = [];
-    pages.push(<option selected disabled hidden>Choose here</option>)
+    pages.push(
+      <option selected disabled hidden>
+        Choose here
+      </option>
+    );
     for (let i = 1; i <= 58; i++) {
       pages.push(<option value={i}>{i}</option>);
     }
@@ -59,35 +63,41 @@ function App() {
           <div className="d-flex justify-content-center mt-5">
             <div className="btn-group col-3">
               {prevPage && (
-                <button className="btn btn-outline-light button" onClick={goPrevPage}>
+                <button
+                  className="btn btn-outline-light button"
+                  onClick={goPrevPage}
+                >
                   <h5>Previous</h5>
                 </button>
               )}
               {nextPage && (
-                <button className="btn btn-outline-light button" onClick={goNextPage}>
+                <button
+                  className="btn btn-outline-light button"
+                  onClick={goNextPage}
+                >
                   <h5>Next</h5>
                 </button>
               )}
             </div>
           </div>
           <div className="d-flex justify-content-end">
-          <label htmlFor="nav-list" className="text-white">
-                <h4>Go to page:</h4>
-              </label>
-              <select
-                name="nav-list"
-                id="nav-list"
-                className="text-box"
-                onChange={(e) =>
-                  setCurrentPage(
-                    `https://pokeapi.co/api/v2/pokemon?offset=${
-                      (e.target.value - 1) * 20
-                    }&limit=20`
-                  )
-                }
-              >
-                <optgroup>{getPages()}</optgroup>
-              </select>
+            <label htmlFor="nav-list" className="text-white">
+              <h4>Go to page:</h4>
+            </label>
+            <select
+              name="nav-list"
+              id="nav-list"
+              className="text-box"
+              onChange={(e) =>
+                setCurrentPage(
+                  `https://pokeapi.co/api/v2/pokemon?offset=${
+                    (e.target.value - 1) * 20
+                  }&limit=20`
+                )
+              }
+            >
+              <optgroup>{getPages()}</optgroup>
+            </select>
           </div>
         </div>
       </div>
