@@ -18,9 +18,7 @@ function Nav() {
               className="logo"
             />
           </div>
-          <div className="navbar-brand fw-bold fs-3">
-            Ethan's Pokedex
-          </div>
+          <div className="navbar-brand fw-bold fs-3">Ethan's Pokedex</div>
           <Button variant="secondary" onClick={handleShow}>
             About
           </Button>
@@ -29,7 +27,20 @@ function Nav() {
               <Modal.Title>About</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              Welcome to my Pokedex! Here, you can see every Pokemon as well as its types and base stats (HP, attack, defense, etc.). At the bottom of the page, you can use the 'Previous' and 'Next' buttons or the dropdown menu to navigate the site. Hope you can use this to learn more about Pokemon!
+              <p>
+                Welcome to my Pokedex! Here, you can see every Pokemon as well
+                as its types and base stats (HP, attack, defense, etc.). At the
+                bottom of the page, you can use the 'Previous' and 'Next'
+                buttons or the dropdown menu to navigate the site. Hope you can
+                use this to learn more about Pokemon!
+              </p>
+              <br></br>
+              <p>
+                NOTE: All Pokemon after #905 (starting with Deoxys Attack) are
+                variant Pokemon, so they do not have descriptions and their
+                index numbers are not official. All original Pokemon have
+                descriptions and correct index numbers though!
+              </p>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="danger" onClick={handleClose}>
