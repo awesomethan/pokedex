@@ -38,7 +38,7 @@ function App() {
   function getPages() {
     const pages = [];
     pages.push(
-      <option selected disabled hidden>
+      <option disabled hidden>
         Choose here
       </option>
     );
@@ -88,6 +88,7 @@ function App() {
               name="nav-list"
               id="nav-list"
               className="text-box"
+              defaultValue="Choose here"
               onChange={(e) =>
                 setCurrentPage(
                   `https://pokeapi.co/api/v2/pokemon?offset=${
