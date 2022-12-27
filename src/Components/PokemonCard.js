@@ -99,7 +99,7 @@ function PokemonCard({ name, url }) {
             <h4 className="card-title text-center">{capitalize(name)}</h4>
             <img className="image" src={image} alt="img cannot be displayed" />
           </div>
-          <div>
+          <div className="d-flex flex-column align-items-center">
             <p>
               <u>Abilities</u>
             </p>
