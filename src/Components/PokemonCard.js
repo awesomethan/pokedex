@@ -30,6 +30,8 @@ function PokemonCard({ name, url }) {
   const [abilities, setAbilities] = useState([]);
   const [height, setHeight] = useState();
   const [weight, setWeight] = useState();
+  const [maleRatio, setMaleRatio] = useState();
+  const [femaleRatio, setFemaleRatio] = useState();
   const [description, setDescription] = useState("");
 
   useEffect(() => {
@@ -50,6 +52,8 @@ function PokemonCard({ name, url }) {
           }
           return null;
         });
+        setFemaleRatio(res.data.gender_rate * 12.5);
+        setMaleRatio((8 - res.data.gender_rate) * 12.5);
       });
   }, [url, index]);
 
@@ -67,7 +71,37 @@ function PokemonCard({ name, url }) {
     return index;
   }
 
-  function getDescriptions() {
+  function getGenderRatio() {
+    if (
+      0 <= maleRatio &&
+      maleRatio <= 100 &&
+      0 <= femaleRatio &&
+      femaleRatio <= 100
+    ) {
+      return (
+        <div className="progress">
+          <div
+            className="progress-bar male"
+            role="progressbar"
+            style={{ width: `${maleRatio}%` }}
+          >
+            {maleRatio}%
+          </div>
+          <div
+            className="progress-bar female"
+            role="progressbar"
+            style={{ width: `${femaleRatio}%` }}
+          >
+            {femaleRatio}%
+          </div>
+        </div>
+      );
+    } else {
+      return <p className="text-center">100% genderless</p>;
+    }
+  }
+
+  function getDescription() {
     if (description === "" && getIndex(index) !== 906) {
       return null;
     } else {
@@ -93,9 +127,9 @@ function PokemonCard({ name, url }) {
           ))}
         </div>
       </div>
-      <div className="card-body mx-auto d-flex flex-column align-items-center">
+      <div className="card-body d-flex flex-column align-items-center">
         <div className="container d-flex justify-content-around">
-          <div className="d-flex flex-column justify-content-center">
+          <div className="d-flex flex-column align-items-center">
             <h4 className="card-title text-center">{capitalize(name)}</h4>
             <img className="image" src={image} alt="img cannot be displayed" />
           </div>
@@ -109,11 +143,11 @@ function PokemonCard({ name, url }) {
           </div>
         </div>
         {stats.map((st) => (
-          <div className="d-flex space-around">
-            <p style={{ width: 500 }}>{capitalize(st.stat.name)}</p>
+          <div className="d-flex justify-content-between stat">
+            <p>{capitalize(st.stat.name)}</p>
             <div className="progress col-9 m-1">
               <div
-                className="progress-bar"
+                className="progress-bar progress-bar-striped progress-bar-animated"
                 role="progressbar"
                 style={{ width: `${st.base_stat / 2}%` }}
               >
@@ -122,21 +156,29 @@ function PokemonCard({ name, url }) {
             </div>
           </div>
         ))}
-        <div className="container d-flex justify-content-around">
-          <div className="d-flex flex-column align-items-center">
-            <p>
-              <u>Height</u>
-            </p>
-            <p>{Math.round(height * 0.328084 * 100) / 100} ft.</p>
-          </div>
-          <div className="d-flex flex-column align-items-center">
-            <p>
-              <u>Weight</u>
-            </p>
-            {Math.round(weight * 0.220462 * 100) / 100} lbs.
+        <div className="container">
+          <div className="row mx-1">
+            <div className="col-3 text-center">
+              <p>
+                <u>Height</u>
+              </p>
+              <p>{Math.round(height * 0.328084 * 100) / 100} ft.</p>
+            </div>
+            <div className="col-3 text-center">
+              <p>
+                <u>Weight</u>
+              </p>
+              {Math.round(weight * 0.220462 * 100) / 100} lbs.
+            </div>
+            <div className="col-6">
+              <p className="text-center">
+                <u>Gender Ratio (Male/Female)</u>
+              </p>
+              {getGenderRatio()}
+            </div>
           </div>
         </div>
-        <div className="px-3">{getDescriptions()}</div>
+        <div className="px-3">{getDescription()}</div>
       </div>
     </div>
   );
