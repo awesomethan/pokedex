@@ -79,7 +79,7 @@ function PokemonCard({ name, url }) {
       femaleRatio <= 100
     ) {
       return (
-        <div className="progress">
+        <div className="progress gender-bar">
           <div
             className="progress-bar male"
             role="progressbar"
