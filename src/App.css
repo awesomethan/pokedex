@@ -31,6 +31,10 @@
   background-color: #ff69b4;
 }
 
+.gender-bar {
+  height: 25%;
+}
+
 .description-container {
   height: 11vh;
 }
