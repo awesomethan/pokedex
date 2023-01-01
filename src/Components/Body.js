@@ -78,26 +78,26 @@ function Body() {
               )}
             </div>
           </div>
-          <div className="d-flex justify-content-end">
-            <label htmlFor="nav-list" className="text-white">
-              <h4>Go to page:</h4>
-            </label>
-            <select
-              name="nav-list"
-              id="nav-list"
-              className="text-box"
-              defaultValue="Choose here"
-              onChange={(e) =>
-                setCurrentPage(
-                  `https://pokeapi.co/api/v2/pokemon?offset=${
-                    (e.target.value - 1) * 20
-                  }&limit=20`
-                )
-              }
-            >
-              <optgroup>{getPages()}</optgroup>
-            </select>
-          </div>
+        </div>
+        <div className="d-flex justify-content-end page-container">
+          <label htmlFor="nav-list" className="text-white">
+            <h3>Go to page:</h3>
+          </label>
+          <select
+            name="nav-list"
+            id="nav-list"
+            className="text-box"
+            defaultValue="Choose here"
+            onChange={(e) =>
+              setCurrentPage(
+                `https://pokeapi.co/api/v2/pokemon?offset=${
+                  (e.target.value - 1) * 20
+                }&limit=20`
+              )
+            }
+          >
+            <optgroup>{getPages()}</optgroup>
+          </select>
         </div>
       </div>
     </div>
