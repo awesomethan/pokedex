@@ -43,6 +43,11 @@
   width: 10vw;
 }
 
+.page-container {
+  padding-bottom: 6vh;
+  padding-right: 4vw;
+}
+
 .text-box {
   height: 5vh;
   border-radius: 10px;
