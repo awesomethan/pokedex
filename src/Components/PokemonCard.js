@@ -162,13 +162,13 @@ function PokemonCard({ name, url }) {
               <p>
                 <u>Height</u>
               </p>
-              <p>{Math.round(height * 0.328084 * 100) / 100} ft.</p>
+              <p>{(height * 0.328084).toFixed(2)} ft.</p>
             </div>
             <div className="col-3 text-center">
               <p>
                 <u>Weight</u>
               </p>
-              {Math.round(weight * 0.220462 * 100) / 100} lbs.
+              {(weight * 0.220462).toFixed(2)} lbs.
             </div>
             <div className="col-6">
               <p className="text-center">
