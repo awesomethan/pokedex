@@ -29,19 +29,19 @@ function Nav() {
             <Modal.Body>
               <p>
                 Welcome to my Pokédex! Here, you can see every Pokémon as well
-                as its types and base stats (HP, attack, defense, etc.). At the
-                bottom of the page, you can use the 'Previous' and 'Next'
-                buttons or the dropdown menu to navigate the site. Hope you can
-                use this to learn more about Pokémon!
+                as its types, abilities, and base stats (HP, attack, defense,
+                etc.). At the bottom of the page, you can use the 'Previous' and
+                'Next' buttons or the dropdown menu to navigate the site. Hope
+                you can use this to learn more about Pokémon!
               </p>
               <br></br>
               <p>
                 NOTE: All Pokémon after #905 are Paldean (Generation 9) Pokémon
-                so images and abilities are currently unavailable (until the API
-                is updated :/). Then, there are variant Pokémon, which do not
-                have descriptions or official index numbers. All Pokémon from
-                Generation 1 to 8 have all the correct stats and information
-                though :D
+                so images, abilities, and descriptions are currently unavailable
+                (until the API is updated :/). Then, there are variant Pokémon,
+                which do not have descriptions or official index numbers. All
+                Pokémon from Generation 1 to 8 have correct information and
+                stats though :D
               </p>
             </Modal.Body>
             <Modal.Footer>
