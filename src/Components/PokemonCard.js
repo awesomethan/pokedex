@@ -67,7 +67,7 @@ function PokemonCard({ name, url }) {
   }
 
   function getIndex(index) {
-    if (index > 10000) index -= 9095;
+    if (index > 10000) index -= 8990;
     return index;
   }
 
@@ -102,7 +102,7 @@ function PokemonCard({ name, url }) {
   }
 
   function getDescription() {
-    if (description === "" && getIndex(index) !== 906) {
+    if (description === "" && getIndex(index) != 906) {
       return null;
     } else {
       return <div className="pt-2 description-container">{description}</div>;
@@ -131,7 +131,11 @@ function PokemonCard({ name, url }) {
         <div className="container d-flex justify-content-around">
           <div className="d-flex flex-column align-items-center">
             <h4 className="card-title text-center">{capitalize(name)}</h4>
-            <img className="image" src={image} alt="img cannot be displayed" />
+            <img
+              className="image"
+              src={image}
+              alt="IMAGE CURRENTLY UNAVAILABLE"
+            />
           </div>
           <div className="d-flex flex-column align-items-center">
             <p>
