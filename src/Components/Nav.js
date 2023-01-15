@@ -36,10 +36,12 @@ function Nav() {
               </p>
               <br></br>
               <p>
-                NOTE: All Pokémon after #905 (starting with Deoxys Attack) are
-                variant Pokémon, so they do not have descriptions and their
-                index numbers are not official. All original Pokémon have
-                descriptions and correct index numbers though!
+                NOTE: All Pokémon after #905 are Paldean (Generation 9) Pokémon
+                so images and abilities are currently unavailable (until the API
+                is updated :/). Then, there are variant Pokémon, which do not
+                have descriptions or official index numbers. All Pokémon from
+                Generation 1 to 8 have all the correct stats and information
+                though :D
               </p>
             </Modal.Body>
             <Modal.Footer>
