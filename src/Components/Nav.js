@@ -40,7 +40,7 @@ function Nav() {
                 so images, abilities, and descriptions are currently unavailable
                 (until the API is updated :/). Then, there are variant Pokémon,
                 which do not have descriptions or official index numbers. All
-                Pokémon from Generation 1 to 8 have correct information and
+                Pokémon from Generation 1 to 8 have the correct information and
                 stats though :D
               </p>
             </Modal.Body>
