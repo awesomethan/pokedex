@@ -83,14 +83,14 @@ function PokemonCard({ name, url }) {
           <div
             className="progress-bar male"
             role="progressbar"
-            style={{ width: `${maleRatio}%` }}
+            style={{ width: `${maleRatio}%`, fontSize: "0.7rem" }}
           >
             {maleRatio}%
           </div>
           <div
             className="progress-bar female"
             role="progressbar"
-            style={{ width: `${femaleRatio}%` }}
+            style={{ width: `${femaleRatio}%`, fontSize: "0.7rem" }}
           >
             {femaleRatio}%
           </div>

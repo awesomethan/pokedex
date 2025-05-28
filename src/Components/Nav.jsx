@@ -34,15 +34,6 @@ function Nav() {
                 'Next' buttons or the dropdown menu to navigate the site. Hope
                 you can use this to learn more about Pokémon!
               </p>
-              <br></br>
-              <p>
-                NOTE: All Pokémon after #905 are Paldean (Generation 9) Pokémon
-                so images, abilities, and descriptions are currently unavailable
-                (until the API is updated :/). Then, there are variant Pokémon,
-                which do not have descriptions or official index numbers. All
-                Pokémon from Generation 1 to 8 have the correct information and
-                stats though :D
-              </p>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="danger" onClick={handleClose}>

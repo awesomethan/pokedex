@@ -62,46 +62,59 @@ function Body() {
               </div>
             ))}
           </div>
-          <div className="d-flex justify-content-center mt-5">
-            <div className="btn-group col-3">
-              {prevPage && (
+          <div className="position-relative mt-5 px-4">
+            {/* Centered button group */}
+            <div
+              className="position-absolute top-50 start-50 translate-middle"
+              style={{ zIndex: 1 }}
+            >
+              <div className="btn-group">
                 <button
-                  className="btn btn-outline-light button"
+                  className="btn btn-outline-light px-4 py-2 mx-2"
                   onClick={goPrevPage}
+                  disabled={!prevPage}
+                  style={{ fontSize: "1.25rem", minWidth: "120px" }}
                 >
-                  <h5>Previous</h5>
+                  Previous
                 </button>
-              )}
-              {nextPage && (
                 <button
-                  className="btn btn-outline-light button"
+                  className="btn btn-outline-light px-4 py-2 mx-2"
                   onClick={goNextPage}
+                  disabled={!nextPage}
+                  style={{ fontSize: "1.25rem", minWidth: "120px" }}
                 >
-                  <h5>Next</h5>
+                  Next
                 </button>
-              )}
+              </div>
+            </div>
+
+            {/* Right-side selector */}
+            <div className="d-flex justify-content-end">
+              <div className="d-flex align-items-center gap-2">
+                <label htmlFor="nav-list" className="text-white mb-0">
+                  <strong>Go to page:</strong>
+                </label>
+                <select
+                  name="nav-list"
+                  id="nav-list"
+                  className="form-select form-select-sm w-auto"
+                  defaultValue=""
+                  onChange={(e) =>
+                    setCurrentPage(
+                      `https://pokeapi.co/api/v2/pokemon?offset=${
+                        (e.target.value - 1) * 15
+                      }&limit=15`
+                    )
+                  }
+                >
+                  <option value="" disabled>
+                    Choose a page
+                  </option>
+                  <optgroup label="Pages">{getPages()}</optgroup>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="d-flex justify-content-end page-container">
-          <label htmlFor="nav-list" className="text-white">
-            <h3>Go to page:</h3>
-          </label>
-          <select
-            name="nav-list"
-            id="nav-list"
-            className="text-box"
-            defaultValue="Choose here"
-            onChange={(e) =>
-              setCurrentPage(
-                `https://pokeapi.co/api/v2/pokemon?offset=${
-                  (e.target.value - 1) * 15
-                }&limit=15`
-              )
-            }
-          >
-            <optgroup>{getPages()}</optgroup>
-          </select>
         </div>
       </div>
     </div>
