@@ -30,9 +30,11 @@ function Nav() {
               <p>
                 Welcome to my Pokédex! Here, you can see every Pokémon as well
                 as its types, abilities, and base stats (HP, attack, defense,
-                etc.). At the bottom of the page, you can use the 'Previous' and
-                'Next' buttons or the dropdown menu to navigate the site. Hope
-                you can use this to learn more about Pokémon!
+                etc.). You can also use the search bar at the top of the page to
+                quickly find Pokémon by name. At the bottom of the page, you can
+                navigate through all Pokémon using the 'Previous' and 'Next'
+                buttons or the page dropdown menu. Hope you enjoy exploring and
+                learning more about Pokémon!
               </p>
             </Modal.Body>
             <Modal.Footer>

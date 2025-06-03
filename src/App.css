@@ -83,3 +83,8 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+body.modal-open {
+  overflow-y: scroll !important;
+  padding-right: 0 !important;
+}
