@@ -25,13 +25,14 @@ function PokemonCard({ name, url }) {
 
   const index = url.split("/")[url.split("/").length - 2];
   const image = `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/${index}.png?raw=true`;
+
   const [types, setTypes] = useState([]);
   const [stats, setStats] = useState([]);
   const [abilities, setAbilities] = useState([]);
-  const [height, setHeight] = useState();
-  const [weight, setWeight] = useState();
-  const [maleRatio, setMaleRatio] = useState();
-  const [femaleRatio, setFemaleRatio] = useState();
+  const [height, setHeight] = useState(null);
+  const [weight, setWeight] = useState(null);
+  const [maleRatio, setMaleRatio] = useState(null);
+  const [femaleRatio, setFemaleRatio] = useState(null);
   const [description, setDescription] = useState("");
 
   useEffect(() => {
@@ -42,80 +43,42 @@ function PokemonCard({ name, url }) {
       setHeight(res.data.height);
       setWeight(res.data.weight);
     });
+
     axios
       .get(`https://pokeapi.co/api/v2/pokemon-species/${index}`)
       .then((res) => {
-        res.data.flavor_text_entries.some((desc) => {
-          if (desc.language.name === "en") {
-            setDescription(desc.flavor_text);
-            return null;
-          }
-          return null;
-        });
+        const latestEntry = [...res.data.flavor_text_entries]
+          .reverse()
+          .find((e) => e.language.name === "en");
+        setDescription(latestEntry?.flavor_text ?? "");
         setFemaleRatio(res.data.gender_rate * 12.5);
         setMaleRatio((8 - res.data.gender_rate) * 12.5);
       });
   }, [url, index]);
 
   function capitalize(str) {
-    str = str
+    return str
       .toLowerCase()
       .split("-")
-      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+      .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
       .join(" ");
-    return str;
   }
 
   function getIndex(index) {
-    if (index > 10000) index -= 8990;
-    return index;
-  }
-
-  function getGenderRatio() {
-    if (
-      0 <= maleRatio &&
-      maleRatio <= 100 &&
-      0 <= femaleRatio &&
-      femaleRatio <= 100
-    ) {
-      return (
-        <div className="progress gender-bar">
-          <div
-            className="progress-bar male"
-            role="progressbar"
-            style={{ width: `${maleRatio}%`, fontSize: "0.7rem" }}
-          >
-            {maleRatio}%
-          </div>
-          <div
-            className="progress-bar female"
-            role="progressbar"
-            style={{ width: `${femaleRatio}%`, fontSize: "0.7rem" }}
-          >
-            {femaleRatio}%
-          </div>
-        </div>
-      );
-    } else {
-      return <p className="text-center">100% genderless</p>;
-    }
-  }
-
-  function getDescription() {
-    if (description === "" && getIndex(index) !== 906) {
-      return null;
-    } else {
-      return <div className="pt-2 description-container">{description}</div>;
-    }
+    return index > 10000 ? index - 8990 : index;
   }
 
   return (
-    <div className="card text-bg-danger border border-2">
+    <div
+      className="card text-bg-danger border border-2"
+      style={{ minHeight: "500px" }}
+    >
       <div className="card-header">
         {getIndex(index)}
         <div className="float-end">
           {types.map((t) => (
             <div
+              key={t.type.name}
               className="badge rounded-pill"
               style={{
                 backgroundColor: `#${typeColours[t.type.name]}`,
@@ -127,6 +90,7 @@ function PokemonCard({ name, url }) {
           ))}
         </div>
       </div>
+
       <div className="card-body d-flex flex-column align-items-center">
         <div className="container d-flex justify-content-around">
           <div className="d-flex flex-column align-items-center">
@@ -135,54 +99,120 @@ function PokemonCard({ name, url }) {
               className="image"
               src={image}
               alt={`${capitalize(name)} sprite`}
+              style={{ maxHeight: "120px" }}
             />
           </div>
+
           <div className="d-flex flex-column align-items-center">
             <p>
               <u>Abilities</u>
             </p>
-            {abilities.map((ab) => (
-              <div>{capitalize(ab.ability.name)}</div>
-            ))}
+            {abilities.length > 0 ? (
+              abilities.map((ab) => (
+                <div key={ab.ability.name}>{capitalize(ab.ability.name)}</div>
+              ))
+            ) : (
+              <div style={{ visibility: "hidden" }}>Placeholder</div>
+            )}
           </div>
         </div>
-        {stats.map((st) => (
-          <div className="d-flex justify-content-between stat">
-            <p>{capitalize(st.stat.name)}</p>
-            <div className="progress col-9 m-1">
+
+        {stats.length > 0
+          ? stats.map((st) => (
               <div
-                className="progress-bar progress-bar-striped progress-bar-animated"
-                role="progressbar"
-                style={{ width: `${st.base_stat / 2}%` }}
+                key={st.stat.name}
+                className="d-flex justify-content-between stat"
               >
-                {st.base_stat}
+                <p>{capitalize(st.stat.name)}</p>
+                <div className="progress col-9 m-1">
+                  <div
+                    className="progress-bar progress-bar-striped progress-bar-animated"
+                    role="progressbar"
+                    style={{ width: `${st.base_stat / 2}%` }}
+                  >
+                    {st.base_stat}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        ))}
+            ))
+          : Array(3)
+              .fill(0)
+              .map((_, i) => (
+                <div
+                  key={i}
+                  className="d-flex justify-content-between stat"
+                  style={{ visibility: "hidden" }}
+                >
+                  <p>Stat</p>
+                  <div className="progress col-9 m-1">
+                    <div className="progress-bar" style={{ width: "50%" }}>
+                      50
+                    </div>
+                  </div>
+                </div>
+              ))}
+
         <div className="container">
           <div className="row mx-1">
             <div className="col-3 text-center">
               <p>
                 <u>Height</u>
               </p>
-              <p>{(height * 0.328084).toFixed(2)} ft.</p>
+              <p style={{ visibility: height ? "visible" : "hidden" }}>
+                {height
+                  ? `${(height * 0.328084).toFixed(2)} ft.`
+                  : "Placeholder"}
+              </p>
             </div>
             <div className="col-3 text-center">
               <p>
                 <u>Weight</u>
               </p>
-              {(weight * 0.220462).toFixed(2)} lbs.
-            </div>
-            <div className="col-6">
-              <p className="text-center">
-                <u>Gender Ratio (Male/Female)</u>
+              <p style={{ visibility: weight ? "visible" : "hidden" }}>
+                {weight
+                  ? `${(weight * 0.220462).toFixed(2)} lbs.`
+                  : "Placeholder"}
               </p>
-              {getGenderRatio()}
+            </div>
+            <div className="col-6 text-center">
+              <p>
+                <u>Gender Ratio (M/F)</u>
+              </p>
+              {maleRatio != null && femaleRatio != null ? (
+                <div className="progress gender-bar">
+                  <div
+                    className="progress-bar male"
+                    role="progressbar"
+                    style={{ width: `${maleRatio}%`, fontSize: "0.7rem" }}
+                  >
+                    {maleRatio}%
+                  </div>
+                  <div
+                    className="progress-bar female"
+                    role="progressbar"
+                    style={{ width: `${femaleRatio}%`, fontSize: "0.7rem" }}
+                  >
+                    {femaleRatio}%
+                  </div>
+                </div>
+              ) : (
+                <div style={{ visibility: "hidden" }}>
+                  <div className="progress gender-bar">
+                    <div className="progress-bar" style={{ width: "50%" }}>
+                      50%
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
-        <div className="px-3">{getDescription()}</div>
+
+        <div className="px-3 pt-2 description-container">
+          <p style={{ visibility: description ? "visible" : "hidden" }}>
+            {description || "Placeholder"}
+          </p>
+        </div>
       </div>
     </div>
   );

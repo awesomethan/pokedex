@@ -88,3 +88,11 @@ body.modal-open {
   overflow-y: scroll !important;
   padding-right: 0 !important;
 }
+
+html {
+  scrollbar-gutter: stable; /* modern browsers */
+}
+
+body {
+  overflow-y: scroll; /* Safari fallback */
+}

@@ -68,7 +68,11 @@ function Body() {
           .slice(0, 15);
 
   if (loading) {
-    return "Loading Pokemon...";
+    return (
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <span className="fs-3 text-white">Loading&nbsp;Pokémon…</span>
+      </div>
+    );
   }
 
   return (
